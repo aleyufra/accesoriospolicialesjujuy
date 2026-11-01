@@ -1,0 +1,88 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+type Variant = 'primary' | 'outline';
+type Size = 'sm' | 'md' | 'lg' | 'xl';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  variant?: Variant;
+  size?: Size;
+  icon?: IconName;
+  iconPosition?: 'start' | 'end';
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  icon,
+  iconPosition = 'start',
+  class: className,
+  ...attrs
+} = Astro.props;
+
+const isExternal = /^https?:\/\//.test(href);
+
+const SIZE = {
+  sm: {
+    box: 'min-h-11 gap-2 px-4 text-[17px] tracking-[0.07em] sm:gap-2.5 sm:px-5',
+    chamfer: 'chamfer-8',
+    icon: 18,
+  },
+  md: {
+    box: 'min-h-12 gap-2 px-2.5 py-2 text-base leading-[1.1] tracking-wider',
+    chamfer: 'chamfer-8',
+    icon: 18,
+  },
+  lg: {
+    box: 'min-h-13.5 gap-2.5 px-7 text-[19px] tracking-[0.08em]',
+    chamfer: 'chamfer-10',
+    icon: 20,
+  },
+  xl: { box: 'min-h-16 gap-3 px-8 text-[22px] tracking-[0.08em]', chamfer: 'chamfer-12', icon: 24 },
+} as const satisfies Record<Size, { box: string; chamfer: string; icon: number }>;
+
+const s = SIZE[size];
+const label = 'flex items-center justify-center text-center font-condensed font-semibold uppercase';
+---
+
+{variant === 'primary' ? (
+  <a
+    href={href}
+    target={isExternal ? '_blank' : undefined}
+    rel={isExternal ? 'noopener' : undefined}
+    class:list={[
+      label,
+      s.box,
+      s.chamfer,
+      'bg-brand text-white no-underline transition-colors hover:bg-brand-light hover:text-white',
+      className,
+    ]}
+    {...attrs}
+  >
+    {icon && iconPosition === 'start' && <Icon name={icon} size={s.icon} />}
+    <slot />
+    {icon && iconPosition === 'end' && <Icon name={icon} size={s.icon} strokeWidth={2} />}
+  </a>
+) : (
+  <a
+    href={href}
+    target={isExternal ? '_blank' : undefined}
+    rel={isExternal ? 'noopener' : undefined}
+    class:list={[
+      'flex bg-brand p-px no-underline transition-colors hover:bg-brand-light',
+      s.chamfer,
+      className,
+    ]}
+    {...attrs}
+  >
+    <span class:list={[label, s.box, 'chamfer-inner flex-1 bg-surface text-white']}>
+      {icon && iconPosition === 'start' && <Icon name={icon} size={s.icon} />}
+      <slot />
+      {icon && iconPosition === 'end' && <Icon name={icon} size={s.icon} strokeWidth={2} />}
+    </span>
+  </a>
+)}

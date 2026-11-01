@@ -1,0 +1,20 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  class?: string;
+}
+
+const { id, title, class: className } = Astro.props;
+---
+
+<div data-reveal class={className}>
+  <h2
+    id={id}
+    class="font-display text-[clamp(34px,3.8vw,52px)] leading-[1.05] font-bold tracking-[0.03em] text-balance text-white uppercase"
+  >
+    {title}
+  </h2>
+  <div aria-hidden="true" class="mt-5 h-0.5 w-14 bg-brand"></div>
+  <slot />
+</div>

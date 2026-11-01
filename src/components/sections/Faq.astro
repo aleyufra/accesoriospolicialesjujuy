@@ -1,0 +1,33 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { faqs } from '@/data/landing';
+---
+
+<section
+  id="preguntas"
+  aria-labelledby="faq-titulo"
+  class="scroll-mt-17 border-t border-line bg-surface bg-noise py-[clamp(64px,9vw,120px)]"
+>
+  <div class="container-site grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <SectionHeading id="faq-titulo" title="Preguntas frecuentes" />
+
+    <!-- Acordeón exclusivo nativo: los <details> con el mismo `name` se cierran entre sí. -->
+    <div data-reveal class="border-t border-line">
+      {faqs.map((faq, i) => (
+        <details name="faq" open={i === 0} class="group border-b border-line">
+          <summary class="flex min-h-17 cursor-pointer list-none items-center justify-between gap-5 py-4.5 text-left text-[clamp(18px,1.4vw,20px)] leading-[1.35] font-medium text-white [&::-webkit-details-marker]:hidden">
+            <span>{faq.pregunta}</span>
+            <Icon
+              name="plus"
+              size={22}
+              strokeWidth={2}
+              class="text-brand-light transition-transform duration-250 ease-out group-open:rotate-45"
+            />
+          </summary>
+          <p class="pr-11 pb-6 text-[17px] leading-[1.55] text-muted">{faq.respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

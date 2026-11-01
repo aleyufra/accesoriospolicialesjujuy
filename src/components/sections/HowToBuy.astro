@@ -1,0 +1,41 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { pasos } from '@/data/landing';
+---
+
+<section
+  id="como-comprar"
+  aria-labelledby="como-titulo"
+  class="scroll-mt-17 border-y border-line bg-surface bg-noise py-[clamp(64px,9vw,120px)]"
+>
+  <div class="container-site">
+    <SectionHeading id="como-titulo" title="Cómo comprar" />
+
+    <ol
+      data-reveal
+      class="mt-[clamp(40px,4vw,56px)] grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4"
+    >
+      {pasos.map((paso, i) => {
+        const last = i === pasos.length - 1;
+        return (
+          <li class="flex gap-5 sm:flex-col">
+            <div aria-hidden="true" class="flex flex-col items-center gap-3.5 sm:flex-row">
+              <span class="font-display text-[40px] leading-none font-bold text-brand-light">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class:list={['min-h-px min-w-px flex-1', last ? 'bg-brand' : 'bg-line']} />
+            </div>
+            <p
+              class:list={[
+                'text-lg leading-normal text-pretty text-white',
+                !last && 'pb-9 sm:pb-0',
+              ]}
+            >
+              {paso}
+            </p>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>

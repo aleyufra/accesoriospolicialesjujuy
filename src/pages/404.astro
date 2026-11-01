@@ -1,0 +1,23 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { SITE } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={`Página no encontrada | ${SITE.name}`} noindex>
+  <main class="container-site flex min-h-screen flex-col items-center justify-center py-24 text-center">
+    <p class="font-display text-[clamp(72px,12vw,140px)] leading-none font-bold text-brand-light">
+      404
+    </p>
+    <h1 class="mt-6 font-display text-[clamp(28px,3.4vw,44px)] leading-[1.05] font-bold tracking-[0.03em] uppercase">
+      Página no encontrada
+    </h1>
+    <div aria-hidden="true" class="mt-6 mb-6 h-0.5 w-14 bg-brand"></div>
+    <p class="max-w-[40ch] text-lg leading-normal text-muted">
+      La página que buscás no existe o se movió.
+    </p>
+    <Button href="/" size="lg" class="mt-9">
+      Volver al inicio
+    </Button>
+  </main>
+</BaseLayout>

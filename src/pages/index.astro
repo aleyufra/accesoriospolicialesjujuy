@@ -1,0 +1,28 @@
+---
+import SiteFooter from '@/components/layout/SiteFooter.astro';
+import SiteHeader from '@/components/layout/SiteHeader.astro';
+import WhatsAppFab from '@/components/layout/WhatsAppFab.astro';
+import Catalog from '@/components/sections/Catalog.astro';
+import Faq from '@/components/sections/Faq.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import Hero from '@/components/sections/Hero.astro';
+import HowToBuy from '@/components/sections/HowToBuy.astro';
+import TrustBar from '@/components/sections/TrustBar.astro';
+import WhyUs from '@/components/sections/WhyUs.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <SiteHeader />
+  <main>
+    <Hero />
+    <Catalog />
+    <TrustBar />
+    <HowToBuy />
+    <WhyUs />
+    <Faq />
+    <FinalCta />
+  </main>
+  <SiteFooter />
+  <WhatsAppFab />
+</BaseLayout>

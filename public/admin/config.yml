@@ -1,0 +1,131 @@
+# Sveltia CMS — https://sveltiacms.app/en/docs
+#
+# TODO antes de publicar (ver README → "Deploy"):
+#   - backend.repo      → usuario-u-organización/repositorio en GitHub
+#   - backend.base_url  → URL del Worker sveltia-cms-auth en Cloudflare
+#   - site_url          → dominio definitivo
+
+backend:
+  name: github
+  repo: OWNER/cmch-web
+  branch: main
+  base_url: https://sveltia-cms-auth.CUENTA.workers.dev
+  commit_messages:
+    create: 'catálogo: crea {{collection}} "{{slug}}"'
+    update: 'catálogo: actualiza {{collection}} "{{slug}}"'
+    delete: 'catálogo: elimina {{collection}} "{{slug}}"'
+    uploadMedia: 'media: sube "{{path}}"'
+    deleteMedia: 'media: elimina "{{path}}"'
+
+site_url: https://cmch-web.pages.dev
+logo:
+  src: /favicon.png
+
+# Carpeta por defecto de la biblioteca de medios (las colecciones pueden sobrescribirla).
+media_folder: public/uploads
+public_folder: /uploads
+
+# Slugs sin tildes ni mayúsculas: "Cinto táctico" → "cinto-tactico".
+slug:
+  encoding: ascii
+  clean_accents: true
+  lowercase: true
+
+collections:
+  # ---------------------------------------------------------------------------
+  # Catálogo: un archivo src/content/productos/<slug>/index.json por producto.
+  # Las fotos se guardan en la misma carpeta y Astro las optimiza en el build.
+  # ---------------------------------------------------------------------------
+  - name: productos
+    label: Catálogo
+    label_singular: Producto
+    description: Productos de la sección Catálogo. Se muestran ordenados por el campo "Orden".
+    folder: src/content/productos
+    path: '{{slug}}/index'
+    format: json
+    extension: json
+    media_folder: ''
+    public_folder: ''
+    create: true
+    delete: true
+    identifier_field: nombre
+    summary: '{{orden}} · {{nombre}}'
+    sortable_fields:
+      - { field: orden, label: Orden, default_sort: asc }
+      - { field: nombre, label: Nombre }
+      - { field: precio, label: Precio }
+    fields:
+      - name: nombre
+        label: Nombre
+        widget: string
+        hint: 'Ej.: Porta cargador doble'
+      - name: articulo
+        label: Artículo
+        widget: select
+        options: [el, la, los, las]
+        default: el
+        hint: 'Se usa en el mensaje de WhatsApp: "me interesa EL porta cargador doble".'
+      - name: precio
+        label: Precio (ARS)
+        widget: number
+        value_type: int
+        min: 0
+        hint: 'Sin puntos ni signo $. Ej.: 45000'
+      - name: descripcion
+        label: Descripción corta
+        widget: text
+        hint: Una o dos líneas. En la tarjeta se corta a 2 líneas.
+      - name: fotos
+        label: Fotos
+        label_singular: Foto
+        widget: list
+        required: false
+        hint: La primera es la foto principal de la tarjeta. Las demás se ven en la galería.
+        field:
+          name: foto
+          label: Foto
+          widget: image
+          accept: image/jpeg,image/png,image/webp,image/avif
+      - name: orden
+        label: Orden
+        widget: number
+        value_type: int
+        default: 100
+        hint: Número menor = aparece primero.
+
+  # ---------------------------------------------------------------------------
+  # Ajustes generales del sitio.
+  # ---------------------------------------------------------------------------
+  - name: ajustes
+    label: Ajustes
+    create: false
+    delete: false
+    files:
+      - name: contacto
+        label: Contacto y redes
+        file: src/content/ajustes/contacto.json
+        fields:
+          - name: whatsapp
+            label: Número de WhatsApp
+            widget: string
+            hint: 'Formato internacional sin "+" ni espacios: 549 + código de área + número. Ej.: 5493885168034'
+            pattern:
+              ['^549\d{10}$', 'Debe empezar con 549 y tener 13 dígitos, sin espacios ni guiones.']
+          - name: telefonoVisible
+            label: Teléfono visible
+            widget: string
+            hint: 'Cómo se muestra en la página. Ej.: 388 516-8034'
+          - name: mensajeConsulta
+            label: Mensaje de consulta general
+            widget: text
+            hint: Texto precargado en los botones generales de WhatsApp.
+          - name: facebook
+            label: Facebook (URL)
+            widget: string
+            required: false
+            hint: Dejar vacío para ocultar el ícono.
+          - name: instagram
+            label: Instagram (URL)
+            widget: string
+            required: false
+            hint: Dejar vacío para ocultar el ícono.

@@ -1,0 +1,28 @@
+---
+/**
+ * Marco con esquinas biseladas y borde de 1px: el color de fondo del contenedor
+ * (`class`) actúa como borde y el interior (`innerClass`) como relleno.
+ */
+import type { HTMLTag, Polymorphic } from 'astro/types';
+
+const CHAMFER = {
+  8: 'chamfer-8',
+  10: 'chamfer-10',
+  12: 'chamfer-12',
+  14: 'chamfer-14',
+  16: 'chamfer-16',
+} as const;
+
+type Props<Tag extends HTMLTag = 'div'> = Polymorphic<{ as: Tag }> & {
+  size: keyof typeof CHAMFER;
+  innerClass?: string;
+};
+
+const { as: Tag = 'div', size, class: className, innerClass, ...attrs } = Astro.props;
+---
+
+<Tag class:list={['flex p-px', CHAMFER[size], className]} {...attrs}>
+  <div class:list={['chamfer-inner flex flex-1', innerClass]}>
+    <slot />
+  </div>
+</Tag>

@@ -1,0 +1,47 @@
+---
+import ProductCard from '@/components/catalog/ProductCard.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { getContacto, getProductos } from '@/lib/content';
+
+const [productos, contacto] = await Promise.all([getProductos(), getContacto()]);
+---
+
+<section
+  id="catalogo"
+  aria-labelledby="catalogo-titulo"
+  class="scroll-mt-17 bg-ink pt-[clamp(40px,6vw,88px)] pb-[clamp(64px,9vw,120px)]"
+>
+  <div class="container-site">
+    <SectionHeading id="catalogo-titulo" title="Catálogo">
+      <p class="mt-5 max-w-[52ch] text-[clamp(17px,1.4vw,20px)] leading-normal text-pretty text-muted">
+        Comprás solo lo que te falta. Armá tu correaje pieza por pieza, a tu ritmo.
+      </p>
+    </SectionHeading>
+
+    <div
+      id="catalogo-grid"
+      data-reveal-grid
+      class="mt-[clamp(36px,4vw,56px)] grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
+    >
+      {productos.map((producto) => (
+        <ProductCard producto={producto} whatsapp={contacto.whatsapp} />
+      ))}
+    </div>
+
+    <p
+      data-reveal
+      class="mx-auto mt-[clamp(36px,4vw,56px)] max-w-[58ch] text-center text-lg leading-normal text-balance text-muted"
+    >
+      ¿No sabés si le va a tu arma?{' '}
+      <a
+        href={contacto.waHref}
+        target="_blank"
+        rel="noopener"
+        class="font-medium text-white underline decoration-brand decoration-2 underline-offset-5"
+      >
+        Mandanos un WhatsApp
+      </a>{' '}
+      y te confirmamos antes de comprar.
+    </p>
+  </div>
+</section>

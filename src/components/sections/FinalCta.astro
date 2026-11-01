@@ -1,0 +1,51 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { getContacto } from '@/lib/content';
+
+const { waHref, telefonoVisible } = await getContacto();
+---
+
+<section
+  aria-labelledby="cta-titulo"
+  class="relative overflow-hidden border-t border-line bg-surface-2 bg-noise"
+>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute top-0 left-0 aspect-square w-[clamp(110px,18vw,280px)] stripes-tl"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute right-0 bottom-0 aspect-square w-[clamp(110px,18vw,280px)] stripes-br"
+  ></div>
+
+  <div
+    data-reveal
+    class="relative mx-auto flex max-w-205 flex-col items-center px-[clamp(16px,4vw,48px)] py-[clamp(96px,11vw,150px)] text-center"
+  >
+    <h2
+      id="cta-titulo"
+      class="font-display text-[clamp(34px,4.6vw,62px)] leading-[1.04] font-bold tracking-[0.02em] text-balance text-white uppercase"
+    >
+      ¿Qué le falta a tu correaje?
+    </h2>
+    <div aria-hidden="true" class="mt-7 mb-6 h-0.5 w-18 bg-brand"></div>
+    <p class="max-w-[46ch] text-[clamp(18px,1.5vw,21px)] leading-normal text-pretty text-muted">
+      Escribime, contame qué necesitás.
+      <br />
+      Te respondo con fotos reales y precios.
+    </p>
+
+    <Button href={waHref} size="xl" icon="whatsapp" class="mt-10 w-full max-w-105">
+      Pedir por WhatsApp
+    </Button>
+
+    <a
+      href={waHref}
+      target="_blank"
+      rel="noopener"
+      class="mt-5 flex min-h-11 items-center px-2 font-condensed text-[28px] font-semibold tracking-[0.06em] text-white no-underline hover:text-white hover:underline hover:decoration-brand hover:underline-offset-6"
+    >
+      {telefonoVisible}
+    </a>
+  </div>
+</section>

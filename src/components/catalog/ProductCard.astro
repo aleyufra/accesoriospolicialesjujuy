@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Button from '@/components/ui/Button.astro';
+import ChamferBox from '@/components/ui/ChamferBox.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { formatPrice, lowerFirst } from '@/lib/format';
+import { productMessage, waLink } from '@/lib/whatsapp';
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+import ProductLightbox from './ProductLightbox.astro';
+
+interface Props {
+  producto: CollectionEntry<'productos'>;
+  whatsapp: string;
+}
+
+const { producto, whatsapp } = Astro.props;
+const { nombre, descripcion, precio, fotos } = producto.data;
+const [principal] = fotos;
+const nombreMin = lowerFirst(nombre);
+const lightboxId = `fotos-${producto.id}`;
+const href = waLink(whatsapp, productMessage(producto.data));
+---
+
+<div data-reveal class="flex min-w-0">
+  <ChamferBox
+    as="article"
+    size={14}
+    class="min-w-0 flex-1 bg-line transition-[transform,background-color] duration-250 ease-out hover:-translate-y-1 hover:bg-brand"
+    innerClass="min-w-0 flex-col gap-3 bg-surface p-1.5 pb-2.5 sm:p-2.5 sm:pb-4"
+  >
+    <ChamferBox
+      size={10}
+      class="bg-brand"
+      innerClass="aspect-4/3 items-center justify-center bg-white p-[3%]"
+    >
+      {principal ? (
+        <button
+          type="button"
+          data-lightbox-open={lightboxId}
+          aria-haspopup="dialog"
+          aria-label={`Ver fotos de ${nombreMin}`}
+          class="relative flex size-full cursor-zoom-in items-center justify-center"
+        >
+          <Image
+            src={principal}
+            alt={`${nombre}, foto del producto`}
+            widths={[320, 480, 640]}
+            sizes="(min-width: 1024px) 300px, (min-width: 640px) 30vw, 45vw"
+            class="block size-full max-w-[320px] object-contain"
+          />
+          {fotos.length > 1 && (
+            <span class="absolute right-0 bottom-0 flex items-center gap-1 bg-ink/85 px-1.5 py-0.5 font-condensed text-sm font-semibold text-white">
+              <Icon name="images" size={14} />+{fotos.length - 1}
+            </span>
+          )}
+        </button>
+      ) : (
+        <PhotoPlaceholder label={`Espacio para la foto: ${nombreMin}`} />
+      )}
+    </ChamferBox>
+
+    <h3 class="mt-1 font-display text-sm leading-[1.15] font-bold tracking-[0.02em] text-balance text-white uppercase sm:text-[clamp(16px,0.5vw+14px,19px)]">
+      {nombre}
+    </h3>
+    <p class="line-clamp-2 text-sm leading-[1.4] text-muted sm:text-base">{descripcion}</p>
+
+    <div class="mt-auto flex flex-col gap-3 pt-1">
+      <p class="font-condensed text-2xl leading-none font-semibold tracking-[0.01em] text-white sm:text-[clamp(28px,0.8vw+22px,36px)]">
+        {formatPrice(precio)}
+      </p>
+      <Button href={href} size="md" icon="whatsapp" aria-label={`Pedir ${nombreMin} por WhatsApp`}>
+        <span class="sm:hidden">Consultar</span>
+        <span class="hidden sm:inline">Pedir por WhatsApp</span>
+      </Button>
+    </div>
+  </ChamferBox>
+
+  {principal && <ProductLightbox id={lightboxId} nombre={nombre} fotos={fotos} />}
+</div>

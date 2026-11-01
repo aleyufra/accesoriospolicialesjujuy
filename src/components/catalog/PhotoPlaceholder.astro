@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div
+  role="img"
+  aria-label={label}
+  class="flex size-full items-center justify-center bg-[repeating-linear-gradient(135deg,rgba(46,49,48,0.08)_0_1px,transparent_1px_9px)] p-1.5 text-center font-mono text-[13px] leading-[1.3] text-line"
+>
+  foto de producto
+</div>

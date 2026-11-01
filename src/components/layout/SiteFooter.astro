@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/brand/cmch-logo.png';
+import ChamferBox from '@/components/ui/ChamferBox.astro';
+import Icon from '@/components/ui/Icon.astro';
+import type { IconName } from '@/components/ui/icons';
+import { SITE } from '@/config/site';
+import { getContacto } from '@/lib/content';
+
+const { waHref, telefonoVisible, facebook, instagram } = await getContacto();
+
+interface Red {
+  label: string;
+  icon: IconName;
+  href: string;
+}
+
+// Una red sin URL cargada en el CMS no se muestra.
+const redes: Red[] = [
+  { label: 'Facebook', icon: 'facebook' as const, href: facebook ?? '' },
+  { label: 'Instagram', icon: 'instagram' as const, href: instagram ?? '' },
+].filter((red) => red.href !== '');
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-ink">
+  <div class="container-site flex flex-wrap items-center justify-between gap-8 pt-12 pb-10">
+    <div class="flex items-center gap-4">
+      <Image
+        src={logo}
+        alt={`Logo de ${SITE.name}`}
+        width={64}
+        height={64}
+        densities={[1, 2]}
+        class="block size-16 rounded-full"
+      />
+      <div class="flex flex-col gap-1">
+        <span class="font-display text-xl font-bold tracking-[0.08em] text-white">{SITE.name}</span>
+        <span class="text-base leading-[1.4] text-muted">{SITE.tagline}</span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+      <a
+        href={waHref}
+        target="_blank"
+        rel="noopener"
+        class="flex min-h-11 items-center gap-2.5 pr-2 font-condensed text-xl font-semibold tracking-[0.06em] text-white no-underline hover:text-white hover:underline hover:decoration-brand hover:underline-offset-5"
+      >
+        <Icon name="whatsapp" size={20} class="text-brand-light" />
+        {telefonoVisible}
+      </a>
+      {redes.map((red) => (
+        <ChamferBox
+          as="a"
+          href={red.href}
+          target="_blank"
+          rel="noopener"
+          aria-label={`${SITE.name} en ${red.label}`}
+          size={8}
+          class="size-12 bg-line transition-colors hover:bg-brand"
+          innerClass="items-center justify-center bg-ink"
+        >
+          <Icon name={red.icon} size={20} class="text-white" />
+        </ChamferBox>
+      ))}
+    </div>
+  </div>
+
+  <div class="container-site">
+    <p class="border-t border-line pt-5 pb-7 text-base text-muted">
+      © {year} {SITE.name}
+    </p>
+  </div>
+</footer>

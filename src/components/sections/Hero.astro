@@ -1,0 +1,60 @@
+---
+import { Picture } from 'astro:assets';
+import hero from '@/assets/hero/hero-productos.png';
+import Icon from '@/components/ui/Icon.astro';
+import { getContacto } from '@/lib/content';
+
+const { waHref } = await getContacto();
+---
+
+<!--
+  Celular: foto arriba que se funde hacia abajo y el texto encima del degradado.
+  Desde md: foto a la derecha, a sangre, fundida hacia la izquierda y hacia abajo
+  para que el hero se continúe sin corte en el catálogo (mismo fondo, sin borde).
+-->
+<section aria-labelledby="hero-titulo" class="relative overflow-hidden bg-ink">
+  <div class="h-64 sm:h-80 md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[58%]">
+    <Picture
+      src={hero}
+      formats={['avif']}
+      fallbackFormat="webp"
+      widths={[480, 816]}
+      sizes="(min-width: 768px) 58vw, 100vw"
+      alt="Cinto táctico, porta cargador doble, porta esposa y funda de polímero sobre fondo oscuro"
+      loading="eager"
+      fetchpriority="high"
+      class="size-full object-cover object-[center_40%] mask-b-from-45% md:mask-l-from-45% md:mask-b-from-55%"
+    />
+  </div>
+
+  <div class="container-site relative -mt-20 pb-12 sm:-mt-24 md:mt-0 md:py-[clamp(36px,3.5vw,56px)]">
+    <div class="md:max-w-[min(620px,50%)]">
+      <h1
+        id="hero-titulo"
+        class="font-condensed text-[clamp(40px,4.2vw,60px)] leading-[1.02] font-extrabold text-balance text-white uppercase"
+      >
+        Accesorios para correaje policial
+      </h1>
+      <p class="mt-4 max-w-[40ch] text-[clamp(18px,1.6vw,22px)] leading-snug text-pretty text-muted">
+        Fotos reales, precio cerrado y entrega en mano en Jujuy. Lo revisás y recién ahí pagás.
+      </p>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="#catalogo"
+          class="flex min-h-13 w-full items-center justify-center rounded-lg bg-brand px-7 text-lg font-bold text-white no-underline transition-colors hover:bg-brand-light hover:text-white sm:w-auto"
+        >
+          Ver catálogo
+        </a>
+        <a
+          href={waHref}
+          target="_blank"
+          rel="noopener"
+          class="flex min-h-13 w-full items-center justify-center gap-2.5 rounded-lg border-2 border-brand px-7 text-lg font-bold text-white no-underline transition-colors hover:border-brand-light hover:bg-brand/10 hover:text-white sm:w-auto"
+        >
+          <Icon name="whatsapp" size={22} />
+          Consulta por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
