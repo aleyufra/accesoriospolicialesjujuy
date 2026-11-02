@@ -90,17 +90,17 @@ Entrar a `https://<dominio>/admin/` → **Iniciar sesión con GitHub**. Cada cam
    - Authorization callback URL: `https://<tu-worker>.workers.dev/callback`
 4. **Worker `sveltia-cms-auth`**: desplegarlo con el botón _Deploy to Cloudflare_ de su [repositorio](https://github.com/sveltia/sveltia-cms-auth) y configurar las variables:
    - `GITHUB_CLIENT_ID` y `GITHUB_CLIENT_SECRET` (de la OAuth App)
-   - `ALLOWED_DOMAINS` = dominio del sitio (ej. `cmch-web.pages.dev`)
+   - `ALLOWED_DOMAINS` = dominio del sitio (ej. `accesoriospolicialesjujuy.pages.dev`)
 5. Completar los placeholders y hacer commit.
 
 ### Placeholders pendientes
 
 | Dónde                                                          | Valor actual                                                                      |
 | -------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `astro.config.mjs` → `SITE_URL`                                | `https://cmch-web.pages.dev`                                                      |
+| `astro.config.mjs` → `SITE_URL`                                | `https://accesoriospolicialesjujuy.pages.dev`                                     |
 | `public/admin/config.yml` → `backend.repo`                     | `OWNER/cmch-web`                                                                  |
 | `public/admin/config.yml` → `backend.base_url`                 | `https://sveltia-cms-auth.CUENTA.workers.dev`                                     |
-| `public/admin/config.yml` → `site_url`                         | `https://cmch-web.pages.dev`                                                      |
+| `public/admin/config.yml` → `site_url`                         | `https://accesoriospolicialesjujuy.pages.dev`                                     |
 | `src/content/ajustes/contacto.json` → `facebook` / `instagram` | `https://facebook.com/CMCH`, `https://instagram.com/CMCH` (editable desde el CMS) |
 
 ## Notas técnicas

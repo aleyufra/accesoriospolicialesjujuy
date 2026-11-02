@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // TODO: reemplazar por el dominio definitivo (se usa en canonical, OG y sitemap).
-const SITE_URL = 'https://cmch-web.pages.dev';
+const SITE_URL = 'https://accesoriospolicialesjujuy.pages.dev';
 
 export default defineConfig({
   site: SITE_URL,

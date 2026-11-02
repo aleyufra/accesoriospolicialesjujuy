@@ -17,7 +17,7 @@ backend:
     uploadMedia: 'media: sube "{{path}}"'
     deleteMedia: 'media: elimina "{{path}}"'
 
-site_url: https://cmch-web.pages.dev
+site_url: https://accesoriospolicialesjujuy.pages.dev
 logo:
   src: /favicon.png
 
