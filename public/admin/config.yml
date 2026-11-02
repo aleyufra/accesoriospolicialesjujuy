@@ -7,9 +7,9 @@
 
 backend:
   name: github
-  repo: OWNER/accesoriospolicialesjujuy
+  repo: aleyufra/accesoriospolicialesjujuy
   branch: main
-  base_url: https://sveltia-cms-auth.CUENTA.workers.dev
+  base_url: https://sveltia-cms-auth.almarweb.workers.dev
   commit_messages:
     create: 'catálogo: crea {{collection}} "{{slug}}"'
     update: 'catálogo: actualiza {{collection}} "{{slug}}"'
