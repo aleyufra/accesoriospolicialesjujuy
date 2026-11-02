@@ -1,0 +1,10 @@
+// Cloudflare Workers con assets estáticos: sirve el build de Astro (dist/) sin código de servidor.
+{
+  "name": "cmch-web",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Rutas inexistentes devuelven dist/404.html con status 404 (no se comporta como SPA).
+    "not_found_handling": "404-page",
+  },
+}
