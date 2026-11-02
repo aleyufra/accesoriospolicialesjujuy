@@ -7,7 +7,7 @@
 
 backend:
   name: github
-  repo: OWNER/cmch-web
+  repo: OWNER/accesoriospolicialesjujuy
   branch: main
   base_url: https://sveltia-cms-auth.CUENTA.workers.dev
   commit_messages:
