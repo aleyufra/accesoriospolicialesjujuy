@@ -74,7 +74,8 @@ collections:
       - name: descripcion
         label: Descripción corta
         widget: text
-        hint: Una o dos líneas. En la tarjeta se corta a 2 líneas.
+        required: false
+        hint: Opcional. Una o dos líneas. En la tarjeta se corta a 2 líneas.
       - name: fotos
         label: Fotos
         label_singular: Foto

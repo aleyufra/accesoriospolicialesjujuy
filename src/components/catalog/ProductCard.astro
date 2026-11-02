@@ -63,7 +63,7 @@ const href = waLink(whatsapp, productMessage(producto.data));
     <h3 class="mt-1 font-display text-sm leading-[1.15] font-bold tracking-[0.02em] text-balance text-white uppercase sm:text-[clamp(16px,0.5vw+14px,19px)]">
       {nombre}
     </h3>
-    <p class="line-clamp-2 text-sm leading-[1.4] text-muted sm:text-base">{descripcion}</p>
+    {descripcion && <p class="line-clamp-2 text-sm leading-[1.4] text-muted sm:text-base">{descripcion}</p>}
 
     <div class="mt-auto flex flex-col gap-3 pt-1">
       <p class="font-condensed text-2xl leading-none font-semibold tracking-[0.01em] text-white sm:text-[clamp(28px,0.8vw+22px,36px)]">

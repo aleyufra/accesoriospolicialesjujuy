@@ -1,8 +1,10 @@
 {
-  "nombre": "Porta cargador doble",
+  "nombre": "Porta primer auxilio",
   "articulo": "el",
-  "precio": 40000,
-  "descripcion": "Dos cargadores a mano, firmes en el cinto.",
-  "fotos": [],
+  "precio": 16000,
+  "descripcion": "",
+  "fotos": [
+    "porta-primer-auxilio.webp"
+  ],
   "orden": 30
 }

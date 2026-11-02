@@ -1,8 +1,10 @@
 {
-  "nombre": "Funda de polímero para pistola",
+  "nombre": "Bolsa de Descarte",
   "articulo": "la",
-  "precio": 60000,
-  "descripcion": "Funda rígida para portar tu arma en el cinto.",
-  "fotos": [],
+  "precio": 8000,
+  "descripcion": "",
+  "fotos": [
+    "pasted-image-1793512007552.png"
+  ],
   "orden": 10
 }

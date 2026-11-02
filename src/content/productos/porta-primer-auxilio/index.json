@@ -1,8 +1,10 @@
 {
-  "nombre": "Porta primer auxilio",
+  "nombre": "Porta cargador simple",
   "articulo": "el",
-  "precio": 35000,
-  "descripcion": "Botiquín de primeros auxilios en el cinto.",
-  "fotos": [],
+  "precio": 15800,
+  "descripcion": "",
+  "fotos": [
+    "porta-cargador-simple.png"
+  ],
   "orden": 70
 }

@@ -1,8 +1,10 @@
 {
-  "nombre": "Porta cargador simple",
+  "nombre": "Funda de polimero para pistola",
   "articulo": "el",
-  "precio": 30000,
-  "descripcion": "Un cargador extra, liviano y compacto.",
-  "fotos": [],
+  "precio": 22500,
+  "descripcion": "",
+  "fotos": [
+    "funda-de-polimer-para-pistola.png"
+  ],
   "orden": 40
 }

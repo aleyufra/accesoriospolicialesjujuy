@@ -1,8 +1,10 @@
 {
-  "nombre": "Cinto táctico",
+  "nombre": "Porta Celular",
   "articulo": "el",
-  "precio": 45000,
-  "descripcion": "La base del correaje, con hebilla de cierre rápido.",
-  "fotos": [],
+  "precio": 15000,
+  "descripcion": "",
+  "fotos": [
+    "pasted-image-1793512112280.png"
+  ],
   "orden": 20
 }

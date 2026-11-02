@@ -1,8 +1,10 @@
 {
-  "nombre": "Porta esposa",
+  "nombre": "Cinto Táctico",
   "articulo": "el",
   "precio": 35000,
-  "descripcion": "Esposas seguras y a mano en el cinto.",
-  "fotos": [],
+  "descripcion": "",
+  "fotos": [
+    "cinto-tactico.jpg"
+  ],
   "orden": 50
 }

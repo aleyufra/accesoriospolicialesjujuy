@@ -14,7 +14,7 @@ const productos = defineCollection({
       /** Artículo para el mensaje de WhatsApp: "me interesa el cinto táctico". */
       articulo: z.enum(['el', 'la', 'los', 'las']),
       precio: z.number().int().nonnegative(),
-      descripcion: z.string().min(1),
+      descripcion: z.string().optional(),
       /** La primera foto es la principal de la tarjeta. */
       fotos: z.array(image()).default([]),
       orden: z.number().int().default(0),

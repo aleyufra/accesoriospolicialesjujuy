@@ -1,8 +1,10 @@
 {
-  "nombre": "Porta celular",
+  "nombre": "Porta esposas",
   "articulo": "el",
-  "precio": 30000,
-  "descripcion": "Tu celular protegido y siempre accesible.",
-  "fotos": [],
+  "precio": 26000,
+  "descripcion": "",
+  "fotos": [
+    "porta-esposa.png"
+  ],
   "orden": 60
 }
